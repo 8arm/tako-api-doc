@@ -28,7 +28,7 @@ POST https://customer-api.8arm.io/api/v1/auth/token
 Body: {
   "organizationId": "cffa0272-b689-4517-bc71-c93fab6ce0d3",
   "accessKey": "eeb35682-d334-4fd7-9b5f-7fd58930ed01",
-	"accessSecret": "2r3CnYtRdqFOkGVWuSrRupwuBdTE1NLN4bDiqjLUKuORql1_xOA8nAOMYKer6yoY49zzMb3JTBhjutfXzvL7HA"
+  "accessSecret": "2r3CnYtRdqFOkGVWuSrRupwuBdTE1NLN4bDiqjLUKuORql1_xOA8nAOMYKer6yoY49zzMb3JTBhjutfXzvL7HA"
 }
 ```
 
@@ -64,21 +64,22 @@ O endpoint retornará os seguintes dados:
 
 ```jsx
 {
-	  "name": "Nome do colaborador",
+    "name": "Nome do colaborador",
     "contractId": "e614dca1-402c-4aeb-abad-6bdaa86ceeca",
-    contractType: "br:clt",
-    status: "active",
-    personId: "64734db5-261c-40bb-868f-1cf2f75dab36",
-    legalEntityId: "d1623472-2ff2-56f7-8bdc-947c4f7548c3",
-    workerId: "216",
-    department: "Engenharia",
-    roleName: "Software Developer I",
-    emailCorp: "colaborador@emailcorporativo.com",
-    costCenterId: "a95cdd1e-3541-54b0-a8ac-f64b4bfb8a27",
-    costCenterName: "Engenharia e Tecnologia",
-    costCenterCode: "0010",
-    startDate: "2023-01-01",
-    endDate: "2099-01-01",
+    "contractType": "br:clt",
+    "status": "active",
+    "personId": "64734db5-261c-40bb-868f-1cf2f75dab36",
+    "legalEntityId": "d1623472-2ff2-56f7-8bdc-947c4f7548c3",
+    "workerId": "216",
+    "department": "Engenharia",
+    "roleName": "Software Developer I",
+    "emailCorp": "colaborador@emailcorporativo.com",
+    "costCenterId": "a95cdd1e-3541-54b0-a8ac-f64b4bfb8a27",
+    "costCenterName": "Engenharia e Tecnologia",
+    "costCenterCode": "0010",
+    "startDate": "2023-01-01",
+    "endDate": "2099-01-01",
+    "cpf": "89212439098"
 }
 ```
 
@@ -103,6 +104,7 @@ Nem todos os dados são retornados todas para todos os contratos, já que depend
 - “**costCenterCode**”: Código do centro de custo, só existirá caso cadastrado pelo cliente.
 - “**startDate**”: Data de inicio da vigência do contrato.
 - "**endDate**”: Data de fim do contrato, só existirá caso o contrato já tenha sido encerrado ou tenha um encerramento agendado.
+- "**cpf**”: CPF do colaborador, sempre será retornado. 
 
 ### Sumário dos contratos da organização
 
