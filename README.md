@@ -173,7 +173,7 @@ O sumário de contratos retorna somente o **contractId**, **contractType**, **na
 
 ## Recebimento
 
-A partir do setup do recebimento de webhooks, deverá ser informado pelo cliente o endpoint para qual as chamadas serão enviadas. Uma requisição POST será feita para cada **criação**, **deleção** ou **mudança do status de um contrato**.
+A partir do setup do recebimento de webhooks, deverá ser informado pelo cliente o endpoint para qual as chamadas serão enviadas. Uma requisição POST será feita para cada **mudança do status de um contrato**.
 
 Exemplo de chamada:
 
@@ -185,14 +185,15 @@ Headers:
 
 Body: {
   "payload": {
-    "contractId": "e63231e3-8536-4858-8a27-551846fcfbbe",
-    "eventType": "STATUS_CHANGE",
-    "status": "terminated",
-    "previousStatus": "active"
+    "contractType": "br:clt",
+    "contractId": "987e96e8-ff8b-4d1e-8f6e-6660e6335bf7",
+    "event": "termination",
+    "effectiveDate": "2024-10-30",
+    "recordTimestamp": "2024-10-11T19:11:28.850Z"
   },
-  "base64Payload": "eyJjb250cmFjdElkIjoiZTYzMjMxZTMtODUzNi00ODU4LThhMjctNTUxODQ2ZmNmYmJlIiwiZXZlbnRUeXBlIjoiU1RBVFVTX0NIQU5HRSIsInN0YXR1cyI6InRlcm1pbmF0ZWQiLCJwcmV2aW91c1N0YXR1cyI6ImFjdGl2ZSJ9",
+  "base64Payload": "eyJjb250cmFjdElkIjoiOTg3ZTk2ZTgtZmY4Yi00ZDFlLThmNmUtNjY2MGU2MzM1YmY3IiwiY29udHJhY3RUeXBlIjoiYnI6Y2x0IiwiZXZlbnQiOiJ0ZXJtaW5hdGlvbiIsImVmZmVjdGl2ZURhdGUiOiIyMDI0LTEwLTMwIiwicmVjb3JkVGltZXN0YW1wIjoiMjAyNC0xMC0xMVQxOToxMToyOC44NTBaIn0",
   "signatureAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256",
-  "signature": "SDHd111NSZFOAmP9TN4P7kgt1FjgfN6ukpt3h8JJZhZ_equwfXSwTqLGC4Y5hOxPOo711Tpyf5JkHn951FXR2pRr9z9Isaf083pBr7gysxZBQDztEyLH0yzJ8h0MQRf1I05kNby_TU7ddmF77RutlsFIsizsXyDX8jyt0xYrg-nofQDCdV8qyIAAtYe1VvLYVjKikqrG2IZ7Si3qaQKH_5EsKvV3eXNQoElcNk4yx4X7qx7ISAnr9V4HafFiR6FX_4wlLpxo3_oPv9wBzwnybVfgBci771zE333LoWIJGLV2EIAmcrn2ZfU9qPhibfRx2HVINvB4KV1-j0jEZGRFArHZpxWKBnufzasPgs15ylAPE2ce5c1pCpO_6hY3vNU9YBNpiVXzNeKsuEj6h0SooNe9JSwTD8N_qQ14GID4PXfpIcmJzKap3wJA0tbs_m3lSLS40cp8nXWzVxhk7WxHfZxabP7vZcYDO8exqhWAqb9vikT0cgzTjKjmbLXMCDcvEuGU5kHkzB3wjqEuu7bitqkHgjHgvRqO5InkLucoJrWTbbPtqXJlu9U3P7EnuoAYT6qoLofSDSWYITfuZYR3C69skjtBHb7zM9aCYkDH0d_t2oHT404T21xV0eks8Tpi03GKj4COxIvYsKrOzgb_JSOjGVLzVbpzrW0C0uEbW14"
+  "signature": "aKxZaMpdxGpRO7RenQDk93qoW80_iBe7sgtkZfFNZBF_ZYDBIZOyq_QTOCGD9KpZtiilRbGuM0St8FH3nmLVvlKqn-rRsQpuRKtjqUdIhDHumjnaGPHifAQ6p1T9t_JohVo0isAJ9ycKanWoiX5JQlit-xyS54r-UhOiyf0tMNcLkOXKEiP8lMnTyFJzBHEX2bSDzibf2EcKOqhAr31lLbqWiG_veqlOVWNYqF6fF1UWXSqHiStRbgOIwpveetg2odF7i_N42gXXXeETmBUVabhBs4IzMoDF4yOogstALNTCrGj4QYdU7SGgwh9qUIDAf7gIcwiJWY8SUbUSNHfZaL6S5zvPpS8AzIGgujn6G-Ks3APBwoepjOkBrICU2g8rKcPUuS7wgGEmHWnhAByMlXV6Y_DkQCgPVGrpU6KEAAd5RkqDxU_snCr_TWnij09ZuIcY4lDybqiBm7RwkBgBKDZmcV5N-_Yi3Y7FAzavkSlKLRWAoevQqQ9jd8RDKI1OhF7ULgLWCyCNLHubpWQw0VZbglq1IZlE1TikUrvxKNLKEf0xu6TLbbpM1LZQAQ1LwjTKJ6ErEJC2E2epaLr-rgxw4JKp59eS07W4-Ivnh0EXGEPbJg5DWcVIXslLyiYpwmUswbko_m9ujmVY88QNavI7rrmU8BfWYzTtkZVP_f4"
 }
 ```
 
@@ -203,12 +204,16 @@ Os dados contidos dentro do campo “**payload”** servem para que seja possív
 Os campos podem ser interpretados da seguinte forma:
 
 - **contractId**: Identificador do contrato, deve ser utilizado para chamar a API e consultar demais dados relacionados ao contrato informado.
-- “**eventType**”: Mapeia qual o tipo de mudança ocorrida no contrato, hoje temos as seguintes:
-    - "**STATUS_CHANGE**”: Significa que o que está sendo notificado é a mudança do status de um contrato, por exemplo passando "**active**” para "**terminated**”.
-    - "**CREATION**”: Criação de um contrato. Um contrato pode ser criado em qualquer "status”,   da criação de um contra de um novo colaborador nos status "**active**” ou "**onAdmission**” ou a criação de um contrato PJ já finalizado para registro no status "**deactivated**”.
-    - "**DELETION**”: Pode acontecer por exemplo caso seja requisitado a deleção de um contrato criado por engano pelo cliente.
-- "**status**”: Informa o status atual do contrato.
-- “**previousStatus**”:  Caso seja um “**eventType**” do tipo "**STATUS_CHANGE**”, informaremos o status anterior. Ex: Para uma chamada de um colaborador ativo que foi desligado, teremos no payload o **"status”: "terminated”** e **previousStatus: "active”.**
+- **contractType**: Tipo do contrato, atualmente valores suportados são "**br:clt**" ou "**br:pj**".
+- **effectiveDate**: Data em que a mudança será efetivada, pode ser tanto no passado (retificação), como no futuro (agendamento). Formato é YYYY-MM-DD.
+- “**event**”: Mapeia qual o tipo de mudança ocorrida no contrato, hoje temos as seguintes:
+    - "**admission**": Um novo contrato está sendo admitido. Esse evento ocorre quando um novo contrato é criado e registrado no sistema.
+    - "**termination**": O contrato foi encerrado. Esse evento ocorre quando um contrato chega ao fim ou é encerrado por algum motivo, como demissão, rescisão ou término do prazo acordado.
+    - "**wentOnVacation**": O contrato entrou em estado de "férias". Esse evento ocorre quando o colaborador associado ao contrato entra em férias e o contrato é temporariamente suspenso.
+    - "**returnedFromVacation**": O contrato retornou ao estado ativo após o colaborador voltar de férias. Esse evento marca o fim do período de férias e a retomada das atividades normais do contrato.
+    - "**wentOnLeave**": O contrato foi temporariamente suspenso por licença. Esse evento ocorre quando o colaborador associado ao contrato entra em licença (como licença médica, maternidade ou qualquer outro tipo de afastamento).
+    - "**returnedFromLeave**": O contrato foi reativado após o término da licença. Esse evento marca o retorno do colaborador às suas atividades normais após o período de afastamento.
+- "**recordTimestamp**”: Data e hora de quando esse evento foi registrado na plataforma.
 
 ## Assinatura
 
