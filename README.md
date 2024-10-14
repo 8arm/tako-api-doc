@@ -213,6 +213,7 @@ Os campos podem ser interpretados da seguinte forma:
     - "**returnedFromVacation**": O contrato retornou ao estado ativo após o colaborador voltar de férias. Esse evento marca o fim do período de férias e a retomada das atividades normais do contrato.
     - "**wentOnLeave**": O contrato foi temporariamente suspenso por licença. Esse evento ocorre quando o colaborador associado ao contrato entra em licença (como licença médica, maternidade ou qualquer outro tipo de afastamento).
     - "**returnedFromLeave**": O contrato foi reativado após o término da licença. Esse evento marca o retorno do colaborador às suas atividades normais após o período de afastamento.
+    - "**test**": Evento foi enviado por uma chamada ao endpoint de teste de webhook.
 - "**recordTimestamp**”: Data e hora de quando esse evento foi registrado na plataforma.
 
 ## Assinatura
@@ -304,4 +305,44 @@ if payload:
     print("Payload:", payload)
 else:
     print("Falha na verificação do assinatura.")
+```
+
+## Endpoint de teste de webhook
+
+A funcionalidade de teste de webhook permite que os usuários de nossa API verifiquem se as configurações de webhook da organização estão corretas e operacionais. Ao chamar este endpoint, é realizada uma simulação de envio de dados para a URL configurada do webhook da organização, ajudando a garantir que a integração esteja funcionando conforme esperado.
+
+```jsx
+POST https://customer-api.8arm.io/api/v1/webhook/test
+
+Headers:
+Authorization: Bearer <token>
+
+Body: {
+  "contractId": <uuid>,
+  "effectiveDate": <YYYY-MM-DD>
+}
+```
+
+* Os valores no corpo da request são opcionais. Caso não sejam enviados, um `contractId` aleatório será gerado e a data de hoje será usada como `effectiveDate`.
+
+### Exemplo de resposta
+
+```jsx
+POST https://<informed url>
+
+Headers:
+"Content-Type": "application/json"
+
+Body: {
+  "payload": {
+    "contractType": "br:clt",
+    "contractId": "52c9573c-96c6-49ec-9f4a-72206dbc3ee1",
+    "event": "test",
+    "effectiveDate": "2023-10-03",
+    "recordTimestamp": "2024-10-14T18:22:38.571"
+  },
+  "base64Payload": "eyJjb250cmFjdElkIjoiNTJjOTU3M2MtOTZjNi00OWVjLTlmNGEtNzIyMDZkYmMzZWUxIiwiY29udHJhY3RUeXBlIjoiYnI6Y2x0IiwiZXZlbnQiOiJ0ZXN0IiwiZWZmZWN0aXZlRGF0ZSI6IjIwMjMtMTAtMDMiLCJyZWNvcmRUaW1lc3RhbXAiOiIyMDI0LTEwLTE0VDE4OjIyOjM4LjU3MSJ9",
+  "signatureAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256",
+  "signature": "rR5fJWG3HBooTtwK17UaHJwd9EgZTauglT2Wc4433tsvrwvToHwjJu4Z8ohP_W1qibnFSpAIOGokZgwZ3oz_JDFiAi-YcVVPS3VTRpLe3Fo1qQXN_PJiXQs1FCVWqIpvAp_4_lX3PLIVYMbMNcR0pMo60gPBArnKXrKTv5QwOn-mY4giQabooP-HsBOYCk3KfcPr_n1q9-622ls3hlwTif4_B_wATycYjhR0f8DPlW7ANPocUEqpie6ng6a-ioaA8W8s65kHG7fYNsGOHZBlSion9Y60Qo4cQ05gmBv84VEGqzVcWJANIl9pa1km-Dtc9eoYnKKpidZWUPywvk01LODPsBuigZVYlV1AyO4qqr5e1R7zxXyVjNA0BgGlaupEF64WOrD8qQjum4UG6VYAJXMsfpIAyw58aziCDb6TD64-6UTMor-JEaFRH7hQTK0FBzpAPzpAN5VD10XfNjyPcVu_wu1jRlncqdtixC6G6L9eFVrYqDotRHyc78mGIC3w3jqQIIzN_37Vwe1TngydNMKQO4-CWtYs3Dsh7WKwmtiSZH1BZkIN4Z3TIaap_G83JD4xypGiqeucW3WBqL44ddyqXCJIim8g_ywSbC_4a2S2qnb-GlOYPmbxBzSO4oxF-LFBcztdu7kJ0KFpktrwbQB0CgW1JeRlcBIQ7ZbYXOo"
+}
 ```
