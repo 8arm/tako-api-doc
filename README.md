@@ -71,6 +71,7 @@ O endpoint retornará os seguintes dados:
     "personId": "64734db5-261c-40bb-868f-1cf2f75dab36",
     "legalEntityId": "d1623472-2ff2-56f7-8bdc-947c4f7548c3",
     "workerId": "216",
+    "managerId": "fd90286c-041e-44c6-87a9-8ad07e179df0",
     "department": "Engenharia",
     "roleName": "Software Developer I",
     "emailCorp": "colaborador@emailcorporativo.com",
@@ -96,6 +97,7 @@ Nem todos os dados são retornados todas para todos os contratos, já que depend
 - **personId**: Identificador da pessoa física, o valor pode ser utilizado para algumas validações na existência de mais de um contrato (ativos ou inativos) para a mesma pessoa física, sempre será retornado.
 - **legalEntityId**: Identificador da matriz ou filiar do CNPJ para qual o contrato pertence. Pode ser utilizado em cenários onde a empresa possui múltiplas filiais, sempre será retornado.
 - “**workerId**": Matrícula do colaborador, só existirá caso cadastrada pelo cliente.
+- "**managerId**": Contract id do gestor do colaborador, caso registrado.
 - "**department**”: Departamento, só existirá caso cadastrado pelo cliente.
 - "**roleName**”: Nome da função, só existirá caso cadastrado pelo cliente.
 - “**emailCorp**": Email corporativo, só existirá caso cadastrado pelo cliente. É comum estar vazio por exemplo durante o período de admissão e cadastrado no inicio da vigência do contrato.
@@ -144,12 +146,14 @@ A resposta da requisição virá no seguinte formato:
         {
             "contractId": "726410f9-0976-41e3-b2a6-9f52e8e223f1",
             "contractType": "br:clt",
+            "managerId": "fd90286c-041e-44c6-87a9-8ad07e179df0",
             "name": "Beatriz Arruma Celete",
             "status": "terminated"
         },
         {
             "contractId": "98e59650-068b-4840-bd12-afea0038ec59",
             "contractType": "br:clt",
+            "managerId": "fd90286c-041e-44c6-87a9-8ad07e179df0",
             "name": "Cleide Celete Castro",
             "status": "terminated"
         },
@@ -167,7 +171,7 @@ Na resposta acima temos os seguintes campos:
 - **page**: Página dos resultados consultada.
 - **unfilteredTotal**: Total de registros não mapeados pelo filtro, por exemplo no caso da requisição acima existem 35 contratos com estado diferente de "**terminated**”.
 
-O sumário de contratos retorna somente o **contractId**, **contractType**, **name** e **status**. Os valores são retornados para todos os contratos.
+O sumário de contratos retorna somente o **contractId**, **contractType**, **name**, **managerId** e **status**. Os valores são retornados para todos os contratos.
 
 # Webhooks
 
