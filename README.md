@@ -217,7 +217,17 @@ Os campos podem ser interpretados da seguinte forma:
     - "**returnedFromVacation**": O contrato retornou ao estado ativo após o colaborador voltar de férias. Esse evento marca o fim do período de férias e a retomada das atividades normais do contrato.
     - "**wentOnLeave**": O contrato foi temporariamente suspenso por licença. Esse evento ocorre quando o colaborador associado ao contrato entra em licença (como licença médica, maternidade ou qualquer outro tipo de afastamento).
     - "**returnedFromLeave**": O contrato foi reativado após o término da licença. Esse evento marca o retorno do colaborador às suas atividades normais após o período de afastamento.
-    - "**test**": Evento foi enviado por uma chamada ao endpoint de teste de webhook.
+    - **contractChanged**: O contrato sofreu alterações cadastrais. As
+      alterações cadastrais que disparam o evento são:
+        - nome
+        - status
+        - matrícula
+        - departamento
+        - cargo/função
+        - email coorporativo
+        - centro de custo
+    - "**test**": Evento foi enviado por uma chamada ao endpoint de teste de
+      webhook.
 - "**recordTimestamp**”: Data e hora de quando esse evento foi registrado na plataforma.
 
 ## Assinatura
